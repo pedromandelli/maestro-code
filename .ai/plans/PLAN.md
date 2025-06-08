@@ -1,63 +1,55 @@
-# Pedrom.pro - Site Pessoal
+# Maestro Code - Template de Projeto
 
 ## Visão Geral
-Site pessoal profissional para Pedro Mandelli, inspirado no design minimalista e focado do https://ian.is. O objetivo é criar uma presença online clean, profissional e que destaque experiências, projetos e conhecimentos.
+Template base para projetos gerenciados com **Maestro Code**. Este plano serve como ponto de partida para definir objetivos, arquitetura e estratégia de desenvolvimento.
 
 ## Objetivos do Projeto
 
 ### Principal
-- Criar um site pessoal profissional e minimalista
-- Estabelecer presença online para networking e oportunidades
-- Showcase de projetos e habilidades técnicas
+- Definir objetivos claros do projeto
+- Estabelecer arquitetura técnica adequada
+- Implementar funcionalidades conforme PRDs
 
 ### Secundários  
-- Implementar blog para compartilhar conhecimentos
-- Criar seções para portfólio de projetos
-- Integrar com redes sociais e GitHub
+- Manter documentação atualizada
+- Seguir melhores práticas de desenvolvimento
+- Garantir qualidade e testes adequados
 
 ## Arquitetura Técnica
 
-### Stack Proposta
-- **Frontend**: HTML5, CSS3, JavaScript vanilla (minimalista)
-- **Hospedagem**: VPS atual com Docker
-- **Domínio**: Pedrom.pro (já adquirido)
-- **SSL**: Let's Encrypt via Nginx
-- **CMS**: Opcional - considerar headless CMS para blog
+### Stack Sugerida
+- **Frontend**: A ser definido conforme necessidade
+- **Backend**: A ser definido conforme necessidade  
+- **Hospedagem**: A ser definido conforme necessidade
+- **Banco de Dados**: A ser definido conforme necessidade
 
 ### Estrutura de Deployment
-- Container Docker isolado seguindo o padrão do VPS_MULTI_PROJECT_GUIDE
-- Nginx como proxy reverso
-- Backup automatizado
-- Monitoramento via Portainer
+- Containerização quando aplicável
+- CI/CD pipeline
+- Monitoramento e logs
+- Backup e recovery
 
 ## Funcionalidades Principais
 
 ### V1.0 (MVP)
-- [ ] Página inicial com bio profissional
-- [ ] Seção "Sobre"
-- [ ] Lista de projetos/experiências
-- [ ] Contato e links sociais
-- [ ] Design responsivo
+- [ ] Funcionalidade 1 - A ser definida
+- [ ] Funcionalidade 2 - A ser definida
+- [ ] Funcionalidade 3 - A ser definida
 
 ### V2.0 (Futuro)
-- [ ] Blog integrado
-- [ ] Sistema de comentários
-- [ ] Newsletter
-- [ ] Analytics
-
-## Inspirações de Design
-- **ian.is**: Minimalismo, tipografia clean, foco no conteúdo
-- **Design Philosophy**: "Less is more" - conteúdo > decoração
+- [ ] Feature avançada 1
+- [ ] Feature avançada 2
+- [ ] Integrações adicionais
 
 ## Próximos Passos
-1. ✅ Criar feature plan detalhado para o MVP → [website-mvp-plan.md](features/website-mvp-plan.md)
-2. Configurar estrutura Docker no VPS
-3. Implementar design base
-4. Deploy e configuração de domínio
+1. Definir requisitos específicos do projeto
+2. Criar feature plans detalhados em `features/`
+3. Implementar funcionalidades conforme planejamento
+4. Testar e fazer deploy
 
 ## Feature Plans Ativos
-- **[Website MVP](features/website-mvp-plan.md)** - Landing page minimalista inspirada no ian.is - *ATIVO*
+*Nenhum feature plan ativo no momento*
 
 ---
 
-*Este plano será refinado conforme o desenvolvimento avança. Consulte `.ai/plans/features/` para planos específicos de cada feature.* 
+*Este é um template base. Customize conforme as necessidades específicas do seu projeto.* 
