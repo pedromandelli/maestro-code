@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Task Magic System Overview - Sistema de gerenciamento de projetos baseado em arquivos
+globs:
+alwaysApply: true
+---
+# Task Magic System Overview
+
+Whenever you use this rule, start your message with the following:
+
+"Accessing Task Magic system overview..."
+
+O Task Magic é um sistema de gerenciamento de projetos baseado em arquivos, projetado para planejar funcionalidades, gerenciar tarefas de desenvolvimento e manter memória do trabalho passado. Consiste em três componentes principais, cada um regido por seu próprio arquivo de regras detalhado:
+
+1. **Plans (`.ai/plans/`)**:
+   * **Propósito**: Define como os Documentos de Requisitos de Produto (PRDs) são criados e estruturados para o projeto geral e funcionalidades específicas.
+   * **Localização**: PRDs são armazenados em `.ai/plans/`, com planos específicos de funcionalidades em `.ai/plans/features/`.
+   * **Arquivo Principal**: Um `PLAN.md` global é obrigatório em `.ai/plans/`.
+   * **Detalhes**: Para criação de planos, revise completamente `@.cursor/rules/.task-magic/plans.mdc`
+
+2. **Tasks (`.ai/tasks/` & `.ai/TASKS.md`)**:
+   * **Propósito**: Governa a criação, gerenciamento e ciclo de vida de tarefas individuais de desenvolvimento.
+   * **Tarefas Ativas**: Todas as tarefas ativas residem em `.ai/tasks/` como arquivos `task{id}_nome.md`.
+   * **Visão Mestre**: Uma checklist mestre, `.ai/TASKS.md`, espelha o status das tarefas no diretório `.ai/tasks/` e deve ser mantida sincronizada.
+   * **Detalhes**: Para criação de tarefas, revise completamente `@.cursor/rules/.task-magic/tasks.mdc`
+
+3. **Memory (`.ai/memory/`)**:
+   * **Propósito**: Arquiva tarefas concluídas e falhas para fornecer contexto histórico.
+   * **Localização**: Arquivos de tarefas arquivadas são armazenados em `.ai/memory/tasks/`.
+   * **Arquivo de Log**: Um log cronológico de tarefas arquivadas é mantido em `.ai/memory/TASKS_LOG.md`.
+   * **Detalhes**: Para armazenar na memória, revise completamente `@.cursor/rules/.task-magic/memory.mdc`
+
+Este sistema interconectado permite desenvolvimento estruturado de projetos, desde planejamento de alto nível até execução de tarefas e revisão histórica, gerenciado principalmente através de arquivos Markdown e responsabilidades definidas de agentes.

@@ -1,0 +1,96 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Governa a criação e estrutura de Documentos de Requisitos de Produto (PRDs) para funcionalidades
+globs:
+alwaysApply: false
+---
+# Plans Management
+
+Whenever you use this rule, start your message with the following:
+
+"Creating development plan using Task Magic..."
+
+## Propósito
+Este arquivo define como criar e estruturar Documentos de Requisitos de Produto (PRDs) dentro do sistema Task Magic. Os planos servem como blueprints para o desenvolvimento e base para criação de tarefas.
+
+## Estrutura de Arquivos
+
+### Planos Globais
+- **Localização**: `.ai/plans/PLAN.md`
+- **Propósito**: Visão geral do projeto completo, index para outros planos
+- **Obrigatório**: Sim
+
+### Planos de Funcionalidades
+- **Localização**: `.ai/plans/features/{nome-funcionalidade}-plan.md`
+- **Propósito**: Requisitos detalhados para funcionalidades específicas
+- **Nomenclatura**: kebab-case, sufixo `-plan.md`
+
+## Template para Planos de Funcionalidade
+
+```markdown
+# {Nome da Funcionalidade}
+
+## Visão Geral
+[Descrição concisa da funcionalidade e seu propósito]
+
+## Problema/Necessidade
+[Que problema esta funcionalidade resolve?]
+
+## Objetivos
+- [ ] Objetivo primário
+- [ ] Objetivos secundários
+
+## Requisitos Funcionais
+1. **RF001**: [Descrição do requisito]
+2. **RF002**: [Outro requisito]
+
+## Requisitos Não-Funcionais
+- **Performance**: [Requisitos de performance]
+- **Segurança**: [Considerações de segurança]
+- **Usabilidade**: [Requisitos de UX]
+
+## Definição de Pronto
+- [ ] Critério 1
+- [ ] Critério 2
+- [ ] Testes implementados
+- [ ] Documentação atualizada
+
+## Dependências
+- [Lista de dependências técnicas ou de outras funcionalidades]
+
+## Considerações Técnicas
+[Notas sobre implementação, arquitetura, etc.]
+
+## Fora do Escopo
+[O que explicitamente NÃO está incluído]
+```
+
+## Diretrizes para Criação
+
+### Boas Práticas
+1. **Clareza**: Use linguagem simples e direta
+2. **Testabilidade**: Inclua critérios de aceitação verificáveis
+3. **Escopo Definido**: Seja específico sobre o que está incluído/excluído
+4. **Dependências**: Mapeie todas as dependências claramente
+
+### Processo de Criação
+1. Identifique a necessidade/problema
+2. Defina objetivos mensuráveis
+3. Liste requisitos funcionais e não-funcionais
+4. Estabeleça critérios de pronto
+5. Revise e refine o plano
+
+### Atualização de Planos
+- Planos devem ser documentos vivos
+- Atualize quando requisitos mudarem
+- Mantenha histórico de mudanças importantes
+- Archive planos obsoletos em `.ai/memory/plans/`
+
+## Conexão com Tasks
+- Planos são a base para criação de tarefas
+- Cada funcionalidade deve ter seu plano antes das tarefas
+- Use `@.cursor/rules/.task-magic/tasks.mdc` para gerar tarefas a partir dos planos

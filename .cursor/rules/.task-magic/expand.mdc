@@ -1,0 +1,147 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Explica como o agente deve verificar se uma tarefa precisa ser expandida em sub-tarefas
+globs:
+alwaysApply: false
+---
+# Expanding Large Tasks
+
+Whenever you use this rule, start your message with the following:
+
+"Checking if task needs to be expanded..."
+
+Esta regra fornece diretrizes para um agente de IA avaliar se uma tarefa definida no sistema Task Magic é muito complexa ou grande e deve ser recomendada para expansão em sub-tarefas menores e mais gerenciáveis.
+
+## Quando Avaliar Complexidade de Tarefa
+
+A complexidade da tarefa deve ser avaliada:
+
+* **Durante a Criação da Tarefa**: Quando uma nova tarefa está sendo definida baseada em um PRD ou solicitação do usuário.
+* **Antes de Iniciar uma Tarefa**: Quando um agente está prestes a pegar uma tarefa `PENDING`.
+* **Se uma Tarefa Estagnar**: Se uma tarefa `INPROGRESS` mostra pouco progresso por um período significativo.
+
+## Critérios para Identificar Tarefas que Precisam de Expansão
+
+Uma tarefa pode ser candidata para expansão se atender vários dos seguintes critérios:
+
+* **Esforço Estimado**: A tarefa parece provável de levar mais que um limite predefinido (ex: 2-3 dias ideais de desenvolvedor) para completar.
+* **Múltiplos Componentes Distintos**: A tarefa envolve mudanças em múltiplos módulos, serviços ou áreas de UI não relacionadas.
+* **Alta Incerteza/Ambiguidade**: Os requisitos não são totalmente claros, ou há muitos desafios técnicos desconhecidos.
+* **Múltiplos Resultados Lógicos**: A tarefa tem vários resultados distintos e independentemente verificáveis.
+* **Numerosos Critérios de Aceitação**: As seções "Critérios de Aceitação" ou "Definição de Pronto" são excepcionalmente longas e cobrem muitos aspectos diferentes.
+* **Bloqueia Múltiplas Outras Tarefas**: É um grande pré-requisito para um número significativo de tarefas subsequentes.
+
+## Recomendação para Expansão
+
+Se uma tarefa for considerada muito complexa para execução direta baseada nos critérios acima, o agente deve:
+
+1. **Identificar Sub-objetivos**: Quebrar a tarefa em objetivos menores e mais focados.
+2. **Criar Hierarquia Lógica**: Organizar sub-tarefas em uma ordem lógica de dependências.
+3. **Manter Rastreabilidade**: Garantir que cada sub-tarefa se conecte de volta ao objetivo original.
+4. **Preservar Contexto**: Incluir contexto suficiente em cada sub-tarefa para que possa ser executada independentemente.
+
+## Processo de Expansão
+
+### Passo 1: Análise da Tarefa Original
+- Revisar descrição, contexto e critérios de aceitação
+- Identificar componentes e dependências distintas
+- Estimar esforço e complexidade
+
+### Passo 2: Identificar Sub-tarefas
+- Quebrar em unidades lógicas de trabalho
+- Cada sub-tarefa deve ter um objetivo claro
+- Garantir que sub-tarefas sejam independentes quando possível
+
+### Passo 3: Criar Hierarquia
+- Definir dependências entre sub-tarefas
+- Identificar qual sub-tarefa deve ser feita primeiro
+- Mapear bloqueios e dependências
+
+### Passo 4: Gerar Sub-tarefas
+- Usar template padrão de tarefas para cada sub-tarefa
+- Manter referência à tarefa original ("parent")
+- Incluir contexto suficiente para execução independente
+
+## Template para Tarefa Expandida
+
+Quando uma tarefa é expandida, a tarefa original deve ser atualizada para incluir:
+
+```markdown
+# Task {ID}: {Nome da Tarefa} - [EXPANDIDA]
+
+## Status: EXPANDED
+## Priority: [Original Priority]
+## Assigned: Unassigned
+## Created: YYYY-MM-DD
+## Updated: YYYY-MM-DD
+
+## Descrição Original
+[Descrição original da tarefa]
+
+## Razão para Expansão
+[Explicação de por que foi expandida]
+
+## Sub-tarefas Criadas
+- [ ] **Task{ID+1}**: {Nome da sub-tarefa 1}
+- [ ] **Task{ID+2}**: {Nome da sub-tarefa 2}
+- [ ] **Task{ID+3}**: {Nome da sub-tarefa 3}
+
+## Critérios de Aceitação da Tarefa Pai
+- [ ] Todas as sub-tarefas foram concluídas
+- [ ] Integração entre sub-tarefas funciona corretamente
+- [ ] Testes de integração passando
+
+## Definição de Pronto
+- [ ] Todas as sub-tarefas marcadas como COMPLETED
+- [ ] Funcionalidade completa testada e verificada
+- [ ] Documentação atualizada para feature completa
+```
+
+## Diretrizes para Sub-tarefas
+
+### Características de Boas Sub-tarefas
+1. **Específicas**: Cada uma tem um objetivo claro e bem definido
+2. **Pequenas**: Podem ser completadas em 1-2 dias
+3. **Testáveis**: Têm critérios de aceitação verificáveis
+4. **Independentes**: Podem ser trabalhadas por diferentes pessoas se necessário
+5. **Valiosas**: Contribuem para o objetivo maior
+
+### Evitar
+- Sub-tarefas muito granulares (menos de 1 dia)
+- Sub-tarefas que são apenas "passos" e não entregáveis
+- Dependências circulares entre sub-tarefas
+- Sub-tarefas que duplicam trabalho
+
+## Exemplo de Expansão
+
+### Tarefa Original
+```markdown
+# Task 001: Implementar Sistema de Autenticação Completo
+
+## Descrição
+Implementar sistema completo de autenticação com registro, login, recuperação de senha, e perfil de usuário.
+```
+
+### Após Expansão
+```markdown
+# Task 001: Implementar Sistema de Autenticação Completo - [EXPANDIDA]
+
+## Sub-tarefas Criadas
+- [ ] **Task002**: Implementar API de registro de usuário
+- [ ] **Task003**: Implementar API de login e JWT
+- [ ] **Task004**: Implementar recuperação de senha
+- [ ] **Task005**: Criar interface de login/registro
+- [ ] **Task006**: Implementar página de perfil de usuário
+- [ ] **Task007**: Integrar frontend com APIs de autenticação
+```
+
+## Benefícios da Expansão
+1. **Paralelização**: Múltiplas pessoas podem trabalhar simultaneamente
+2. **Progresso Visível**: Avanço incremental em vez de "tudo ou nada"
+3. **Redução de Risco**: Problemas são isolados em sub-tarefas específicas
+4. **Melhor Estimativa**: Sub-tarefas menores são mais fáceis de estimar
+5. **Flexibilidade**: Prioridades podem ser ajustadas entre sub-tarefas

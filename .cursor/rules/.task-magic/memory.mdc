@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Gerencia o arquivamento de tarefas e planos concluídos para contexto histórico
+globs:
+alwaysApply: false
+---
+# Memory Management
+
+Whenever you use this rule, start your message with the following:
+
+"Archiving to Task Magic memory system..."
+
+## Propósito
+Este arquivo define como arquivar tarefas e planos concluídos, proporcionando contexto histórico valioso para futuras decisões e aprendizado.
+
+## Estrutura de Arquivamento
+
+### Tarefas Arquivadas
+- **Localização**: `.ai/memory/tasks/`
+- **Nomenclatura**: Mantém nome original `task{id}_{nome}.md`
+- **Log**: `.ai/memory/TASKS_LOG.md`
+
+### Planos Arquivados  
+- **Localização**: `.ai/memory/plans/`
+- **Nomenclatura**: Mantém nome original `{nome}-plan.md`
+- **Log**: `.ai/memory/PLANS_LOG.md`
+
+## Quando Arquivar
+
+### Tarefas
+- **COMPLETED**: Todos critérios de aceitação atendidos
+- **CANCELLED**: Tarefa cancelada por mudança de requisitos
+- **FAILED**: Tarefa tentada mas não concluída (com aprendizados)
+
+### Planos
+- **COMPLETED**: Funcionalidade totalmente implementada
+- **SUPERSEDED**: Substituído por nova versão do plano
+- **CANCELLED**: Funcionalidade cancelada
+
+## Processo de Arquivamento
+
+### Para Tarefas
+1. **Verificar Status**: Confirmar que tarefa está pronta para arquivar
+2. **Atualizar Arquivo**: Adicionar seção final com resultado
+3. **Mover Arquivo**: De `.ai/tasks/` para `.ai/memory/tasks/`
+4. **Atualizar Log**: Adicionar entrada em `.ai/memory/TASKS_LOG.md`
+5. **Limpar TASKS.md**: Remover tarefa de `.ai/TASKS.md`
+
+### Para Planos
+1. **Verificar Implementação**: Confirmar que funcionalidade foi implementada
+2. **Atualizar Arquivo**: Adicionar seção de fechamento
+3. **Mover Arquivo**: De `.ai/plans/features/` para `.ai/memory/plans/`
+4. **Atualizar Log**: Adicionar entrada em `.ai/memory/PLANS_LOG.md`
+
+## Template de Finalização
+
+### Para Tarefas
+Adicionar no final do arquivo da tarefa antes de arquivar:
+
+```markdown
+## Resultado Final
+**Status**: [COMPLETED|CANCELLED|FAILED]
+**Data de Finalização**: YYYY-MM-DD
+**Tempo Total**: [Estimativa de horas/dias gastos]
+
+### O que foi Entregue
+- [Lista do que foi efetivamente implementado]
+
+### Aprendizados
+- [Lições aprendidas durante a implementação]
+- [Problemas encontrados e como foram resolvidos]
+
+### Impacto
+- [Como esta tarefa afetou o projeto]
+- [Métricas relevantes se aplicável]
+
+### Para Referência Futura
+- [Links para código relevante]
+- [Documentação criada]
+- [Configurações importantes]
+```
+
+### Para Planos
+Adicionar no final do arquivo do plano:
+
+```markdown
+## Status de Implementação
+**Status**: [COMPLETED|SUPERSEDED|CANCELLED]
+**Data de Finalização**: YYYY-MM-DD
+**Tarefas Relacionadas**: [Lista de task IDs que implementaram este plano]
+
+### Resumo de Implementação
+- [O que foi efetivamente implementado]
+- [Mudanças em relação ao plano original]
+
+### Métricas de Sucesso
+- [Como os objetivos foram medidos]
+- [Resultados alcançados]
+
+### Lições Aprendidas
+- [O que funcionou bem]
+- [O que poderia ter sido feito diferente]
+- [Aprendizados para futuros planos similares]
+```
+
+## Formato dos Logs
+
+### TASKS_LOG.md
+```markdown
+YYYY-MM-DD - task{id}_{nome} - [COMPLETED|FAILED|CANCELLED] - Breve descrição do resultado
+```
+
+**Exemplo**:
+```markdown
+2024-12-15 - task001_setup-docker-environment - COMPLETED - Ambiente Docker configurado com sucesso, permite deploys isolados
+2024-12-16 - task002_user-authentication - FAILED - Bloqueado por limitações da API externa, será retomado na próxima versão
+```
+
+### PLANS_LOG.md
+```markdown
+YYYY-MM-DD - {nome-do-plano} - [COMPLETED|SUPERSEDED|CANCELLED] - Motivo do arquivamento
+```
+
+**Exemplo**:
+```markdown
+2024-12-20 - user-authentication-plan - COMPLETED - Funcionalidade implementada com sucesso, 3 tarefas relacionadas
+2024-12-21 - old-dashboard-plan - SUPERSEDED - Substituído por novo plano com foco em responsividade
+```
+
+## Consulta de Memória
+
+### Para Contexto Histórico
+A memória deve ser consultada quando:
+- Implementando funcionalidades similares às já feitas
+- Debugando problemas recorrentes  
+- Estimando esforço para novas tarefas
+- Tomando decisões arquiteturais
+
+### Comandos de Consulta
+```bash
+# Buscar por tarefas similares
+grep -r "autenticação" .ai/memory/tasks/
+
+# Ver implementações passadas de uma funcionalidade
+cat .ai/memory/plans/user-auth-plan.md
+
+# Verificar padrões de problemas
+grep "FAILED" .ai/memory/TASKS_LOG.md
+```
+
+## Limpeza Periódica
+- **Frequência**: Trimestral
+- **Critério**: Manter arquivos dos últimos 12 meses
+- **Backup**: Arquivar itens mais antigos em sistema externo
+- **Índice**: Manter índice de arquivos removidos para referência
+
+## Benefícios da Memória
+1. **Aprendizado Contínuo**: Evita repetir erros
+2. **Estimativas Melhores**: Histórico real de tempo gasto
+3. **Padrões de Solução**: Reutilizar abordagens que funcionaram
+4. **Contexto de Decisões**: Entender por que certas escolhas foram feitas
+5. **Onboarding**: Novos membros podem entender histórico do projeto
